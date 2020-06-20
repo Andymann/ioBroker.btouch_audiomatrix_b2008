@@ -1,0 +1,76 @@
+{
+	"common": {
+		"name": "btouch_audiomatrix_b2008",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "BTouch AudioMatrix b2008",
+		"titleLang": {
+			"en": "BTouch AudioMatrix b2008",
+			"de": "BTouch AudioMatrix b2008",
+			"ru": "BTouch AudioMatrix b2008",
+			"pt": "BTouch AudioMatrix b2008",
+			"nl": "BTouch AudioMatrix b2008",
+			"fr": "BTouch AudioMatrix b2008",
+			"it": "BTouch AudioMatrix b2008",
+			"es": "BTouch AudioMatrix b2008",
+			"pl": "BTouch AudioMatrix b2008",
+			"zh-cn": "BTouch AudioMatrix b2008"
+		},
+		"desc": {
+			"en": "BTouch AudioMatrix b2008",
+			"de": "BTouch AudioMatrix b2008",
+			"ru": "BTouch AudioMatrix b2008",
+			"pt": "BTouch AudioMatrix b2008",
+			"nl": "BTouch AudioMatrix b2008",
+			"fr": "BTouch AudioMatrix b2008",
+			"it": "BTouch AudioMatrix b2008",
+			"es": "BTouch AudioMatrix b2008",
+			"pl": "BTouch AudioMatrix b2008",
+			"zh-cn": "BTouch AudioMatrix b2008"
+		},
+		"authors": [
+			"Andy Fischer <info@Andyland.info>"
+		],
+		"keywords": [
+			"BTouch"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "main.js",
+		"icon": "btouch_audiomatrix_b2008.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/Andymann/ioBroker.btouch_audiomatrix_b2008/master/admin/btouch_audiomatrix_b2008.png",
+		"readme": "https://github.com/Andymann/ioBroker.btouch_audiomatrix_b2008/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "multimedia",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=1.4.2"
+			}
+		]
+	},
+	"native": {
+		"option1": true,
+		"option2": "42"
+	},
+	"objects": [],
+	"instanceObjects": []
+}
