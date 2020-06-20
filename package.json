@@ -1,7 +1,7 @@
 {
   "name": "iobroker.btouch_audiomatrix_b2008",
   "version": "0.0.1",
-  "description": "BTouch AudioMatrix b2008",
+  "description": "bTouch AudioMatrix b2008",
   "author": {
     "name": "Andy Fischer",
     "email": "info@Andyland.info"
