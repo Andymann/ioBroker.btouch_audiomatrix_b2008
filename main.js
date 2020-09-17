@@ -832,7 +832,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 				type: 'state',
 				common: {
 					'name': 'Label for Input #' + (i + 1).toString(),        // mandatory, default _id ??
-					'def': 'In ' + (i + 1).toString(),                     // optional,  default ''
+					//'def': 'In ' + (i + 1).toString(),                     // optional,  default ''
 					'type': 'info',               // optional,  default 'string'
 					'read': true,                   // mandatory, default true
 					'write': true,                  // mandatory, default false
@@ -846,7 +846,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 				type: 'state',
 				common: {
 					'name': 'Label for Output #' + (i + 1).toString(),        // mandatory, default _id ??
-					'def': 'Out ' + (i + 1).toString(),                     // optional,  default ''
+					//'def': 'Out ' + (i + 1).toString(),                     // optional,  default ''
 					'type': 'info',               // optional,  default 'string'
 					'read': true,                   // mandatory, default true
 					'write': true,                  // mandatory, default false
