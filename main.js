@@ -31,6 +31,7 @@ let bWaitQueue = false;
 let bFirstPing = true;
 let bHasIncomingData = false;
 let in_msg = '';
+let serPort = '';
 
 //----TEST
 let bSerialCommunication = true;
@@ -196,8 +197,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			};
 
 			// matrix = new serialport('/dev/ttyUSB0', options);
-			let serport = this.config.serialPort;
-			matrix = new serialPort(serport, options);
+			matrix = new serialPort(this.serPort, options);
 			parser = matrix.pipe(new ByteLength({ length: 1 }));
 
 			if (bConnection == false) {
@@ -1134,6 +1134,8 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 		this.log.info('Config SerialPort:' + this.config.serialPort);
 		this.log.info('Config Host:' + this.config.host);
 		this.log.info('Config Port:' + this.config.port);
+
+		this.serPort = this.config.serialPort;
 
 		/*
 		For every state in the system there has to be also an object of type state
