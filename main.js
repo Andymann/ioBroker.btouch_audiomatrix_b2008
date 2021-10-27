@@ -835,7 +835,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 				common: {
 					'name': 'Label for Input #' + (i + 1).toString(),        // mandatory, default _id ??
 					//'def': 'In ' + (i + 1).toString(),                     // optional,  default ''
-					'type': 'info',               // optional,  default 'string'
+					'type': 'string',               // optional,  default 'string'
 					'read': true,                   // mandatory, default true
 					'write': true,                  // mandatory, default false
 					'role': 'info',   // mandatory
