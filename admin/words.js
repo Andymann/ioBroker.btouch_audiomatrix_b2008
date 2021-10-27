@@ -37,5 +37,9 @@ systemDictionary = {
 		"es": "opcion 2",
 		"pl": "Opcja 2",
 		"zh-cn": "选项2"
+	},
+	"serialPort": {
+		"en": "Serial Port",
+		"de": "Serieller Port"
 	}
 };
