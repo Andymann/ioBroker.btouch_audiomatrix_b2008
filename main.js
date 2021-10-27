@@ -196,7 +196,8 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			};
 
 			// matrix = new serialport('/dev/ttyUSB0', options);
-			matrix = new serialPort(this.config.serialPort, options);
+			let serport = this.config.serialPort;
+			matrix = new serialPort(serport, options);
 			parser = matrix.pipe(new ByteLength({ length: 1 }));
 
 			if (bConnection == false) {
@@ -1130,7 +1131,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 		// this.config:
 		//this.log.info('config option1: ' + this.config.option1);
 		//this.log.info('config option2: ' + this.config.option2);
-		this.log.info('Config SerialPrt:' + this.config.serialPort);
+		this.log.info('Config SerialPort:' + this.config.serialPort);
 		this.log.info('Config Host:' + this.config.host);
 		this.log.info('Config Port:' + this.config.port);
 
