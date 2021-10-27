@@ -197,7 +197,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			};
 
 			// matrix = new serialport('/dev/ttyUSB0', options);
-			matrix = new serialPort(this.serPort, options);
+			matrix = new serialport(this.serPort, options);
 			parser = matrix.pipe(new ByteLength({ length: 1 }));
 
 			if (bConnection == false) {
