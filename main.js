@@ -11,8 +11,9 @@ const utils = require("@iobroker/adapter-core");
 // Load your modules here, e.g.:
 // const fs = require('fs');
 const net = require('net');
-const serialport = require('serialport');
-const ByteLength = require('@serialport/parser-byte-length');
+const { SerialPort } = require('serialport');
+const { ByteLengthParser } = require('serialport');
+//const ByteLength = require('@serialport/parser-byte-length');
 //const port = new SerialPort('/dev/ttyUSB0', {baudrate: 115200});
 //const parser = port.pipe(new ByteLength({length: 1}));
 
@@ -31,7 +32,6 @@ let bWaitQueue = false;
 let bFirstPing = true;
 let bHasIncomingData = false;
 let in_msg = '';
-let serPort = '';
 
 //----TEST
 let bSerialCommunication = true;
@@ -189,16 +189,15 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 		if (bSerialCommunication == true) {
 			this.log.info('connectMatrix(): Serial Port Mode');
-			const options = {
+
+			matrix = new SerialPort({
+				path: this.config.port,
 				baudRate: 115200,
 				dataBits: 8,
 				stopBits: 1,
 				parity: 'none'
-			};
-
-			// matrix = new serialport('/dev/ttyUSB0', options);
-			matrix = new serialport(this.serPort, options);
-			parser = matrix.pipe(new ByteLength({ length: 1 }));
+			});
+			parser = matrix.pipe(new ByteLengthParser({ length: 1 }));
 
 			if (bConnection == false) {
 				parentThis.log.debug('connectMatrix() Serial. bConnection==false, sending CMDCONNECT:' + toHexString(cmdConnect));
@@ -834,6 +833,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 				type: 'state',
 				common: {
 					'name': 'Label for Input #' + (i + 1).toString(),        // mandatory, default _id ??
+					//---Deaktivieren weil neu gesetzt mit jedem Reboot
 					//'def': 'In ' + (i + 1).toString(),                     // optional,  default ''
 					'type': 'string',               // optional,  default 'string'
 					'read': true,                   // mandatory, default true
@@ -1131,11 +1131,8 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 		// this.config:
 		//this.log.info('config option1: ' + this.config.option1);
 		//this.log.info('config option2: ' + this.config.option2);
-		this.log.info('Config SerialPort:' + this.config.serialPort);
 		this.log.info('Config Host:' + this.config.host);
 		this.log.info('Config Port:' + this.config.port);
-
-		this.serPort = this.config.serialPort;
 
 		/*
 		For every state in the system there has to be also an object of type state
