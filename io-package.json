@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "btouch_audiomatrix_b2008",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "news": {
+	   "0.0.4": {
+		"en": "change handling of serial port, fix deprecated handling of states",
+		"de": "Der serielle Port wird anders erzeugt, veraltete Behandlung von Zustaenden gefixt."
+		  },
       "0.0.3": {
         "en": "add serial port selection to admin page",
         "de": "Der serielle Port kann auf der Admin-Seite eingestellt werden."
