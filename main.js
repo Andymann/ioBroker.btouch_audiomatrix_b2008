@@ -191,7 +191,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			this.log.info('connectMatrix(): Serial Port Mode');
 
 			matrix = new SerialPort({
-				path: this.config.port,
+				path: '/dev/ttyUSB0',
 				baudRate: 115200,
 				dataBits: 8,
 				stopBits: 1,
