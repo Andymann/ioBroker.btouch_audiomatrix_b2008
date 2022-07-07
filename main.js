@@ -1069,7 +1069,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 					this.log.info('_parseMSG(): received routing info. IN:' + (iVal).toString() + ' OUT:' + (iCmd - 50).toString() + '. State:' + bValue.toString());
 					let sID = (0 + (iVal - 1) * 8 + (iCmd - 50 - 1)).toString();
 					while (sID.length < 2) sID = '0' + sID;
-					this.setStateAsync('routingNode_ID_' + sID + '_IN_' + (iVal).toString() + '_OUT_' + (iCmd - 50).toString(), { val: bValue, ack: true });
+					this.setStateAsync('routingNode_ID_' + sID + '__IN_' + (iVal).toString() + '_OUT_' + (iCmd - 50).toString(), { val: bValue, ack: true });
 					arrRouting[((iVal - 1) * 8 + (iCmd - 50 - 1))] = bValue;
 				}
 			} else if (iVal >= 7 && iVal <= 14) {
