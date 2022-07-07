@@ -18,12 +18,12 @@ const net = require('net');
 //const parser = port.pipe(new ByteLength({length: 1}));
 
 //----VOR 2022
-const serialport = require('serialport');
-const ByteLength = require('@serialport/parser-byte-length');
+//const serialport = require('serialport');
+//const ByteLength = require('@serialport/parser-byte-length');
 
 //----Nach 2021
-//const { SerialPort } = require('serialport');
-//const { ByteLengthParser } = require('serialport');
+const { SerialPort } = require('serialport');
+const { ByteLengthParser } = require('serialport');
 
 let matrix = null;
 
@@ -199,26 +199,27 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			this.log.info('connectMatrix(): Serial Port Mode');
 
 			//----NEU
-			//matrix = new SerialPort({
-			//	path: '/dev/ttyUSB0',
-			//	baudRate: 115200,
-			//	dataBits: 8,
-			//	stopBits: 1,
-			//	parity: 'none'
-			//});
-			//parser = matrix.pipe(new ByteLengthParser({ length: 1 }));
-
-			//---ALT
-			const options = {
+			matrix = new SerialPort({
+				path: '/dev/ttyUSB0',
 				baudRate: 115200,
 				dataBits: 8,
 				stopBits: 1,
 				parity: 'none'
-			};
-
+			});
+			
+			parser = matrix.pipe(new ByteLengthParser({ length: 1 }));
+			//---ALT
+			//const options = {
+				//	baudRate: 115200,
+				//	dataBits: 8,
+				//	stopBits: 1,
+				//	parity: 'none'
+				//};
+				
 			// matrix = new serialport('/dev/ttyUSB0', options);
-			matrix = new serialport(this.serPort, options);
-			parser = matrix.pipe(new ByteLength({ length: 1 }));
+			//parser = matrix.pipe(new ByteLength({ length: 1 }));
+			
+			//matrix = new serialport(this.serPort, options);
 			//----
 			if (bConnection == false) {
 				parentThis.log.debug('connectMatrix() Serial. bConnection==false, sending CMDCONNECT:' + toHexString(cmdConnect));
