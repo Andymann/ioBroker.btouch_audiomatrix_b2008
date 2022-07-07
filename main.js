@@ -296,18 +296,18 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 		matrix.on('close', function (e) {
 			//if (bConnection) {
-			parentThis.log.error('AudioMatrix closed. TBD');
+			parentThis.log.debug('AudioMatrix closed. TBD');
 			//}
 			//parentThis.reconnect();
 		});
 
 		matrix.on('disconnect', function (e) {
-			parentThis.log.error('AudioMatrix disconnected. TBD');
+			//parentThis.log.error('AudioMatrix disconnected. TBD');
 			//            parentThis.reconnect();
 		});
 
 		matrix.on('end', function (e) {
-			parentThis.log.error('AudioMatrix ended');
+			//parentThis.log.error('AudioMatrix ended');
 			//parentThis.setState('info.connection', false, true);
 		});
 
