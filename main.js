@@ -708,7 +708,6 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 		await this.setObjectAsync('mainVolume', {
 			type: 'state',
 			common: {
-				def: 'Main Volume',
 				name: 'Main Volume',
 				type: 'number',
 				role: 'level.volume',
@@ -728,7 +727,6 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			await this.setObjectAsync('inputGain_' + (inVal + 1).toString(), {
 				type: 'state',
 				common: {
-					def: 'Input Gain ' + (inVal + 1).toString(),
 					name: 'Input Gain ' + (inVal + 1).toString(),
 					type: 'number',
 					role: 'level.volume',
@@ -749,7 +747,6 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			await this.setObjectAsync('outputGain_' + (outVal + 1).toString(), {
 				type: 'state',
 				common: {
-					def: 'Output Gain ' + (outVal + 1).toString(),
 					name: 'Output Gain ' + (outVal + 1).toString(),
 					type: 'number',
 					role: 'level.volume',
