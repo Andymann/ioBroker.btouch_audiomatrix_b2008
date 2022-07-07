@@ -707,6 +707,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 		await this.setObjectAsync('mainVolume', {
 			type: 'state',
 			common: {
+				def: 'Main Volume',
 				name: 'Main Volume',
 				type: 'number',
 				role: 'level.volume',
@@ -726,6 +727,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			await this.setObjectAsync('inputGain_' + (inVal + 1).toString(), {
 				type: 'state',
 				common: {
+					def: 'Input Gain ' + (inVal + 1).toString(),
 					name: 'Input Gain ' + (inVal + 1).toString(),
 					type: 'number',
 					role: 'level.volume',
@@ -746,6 +748,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			await this.setObjectAsync('outputGain_' + (outVal + 1).toString(), {
 				type: 'state',
 				common: {
+					def: 'Output Gain ' + (outVal + 1).toString(),
 					name: 'Output Gain ' + (outVal + 1).toString(),
 					type: 'number',
 					role: 'level.volume',
@@ -853,6 +856,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			await this.setObjectAsync('_label_Input_' + (i + 1).toString(), {
 				type: 'state',
 				common: {
+					'def': 'Label for Input #' + (i + 1).toString(),
 					'name': 'Label for Input #' + (i + 1).toString(),        // mandatory, default _id ??
 					//---Deaktivieren weil neu gesetzt mit jedem Reboot
 					//'def': 'In ' + (i + 1).toString(),                     // optional,  default ''
@@ -868,6 +872,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			await this.setObjectAsync('_label_Output_' + (i + 1).toString(), {
 				type: 'state',
 				common: {
+					'def': 'Label for Output #' + (i + 1).toString(),
 					'name': 'Label for Output #' + (i + 1).toString(),        // mandatory, default _id ??
 					//'def': 'Out ' + (i + 1).toString(),                     // optional,  default ''
 					'type': 'string',               // optional,  default 'string'
