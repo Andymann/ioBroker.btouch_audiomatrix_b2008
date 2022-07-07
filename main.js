@@ -410,12 +410,12 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 		//----fix checksum
 		tmpCMD = convertArray(tmpCMD);
-		this.log.info('changeMuting(): adding:' + toHexString(tmpCMD));
+		this.log.debug('changeMuting(): adding:' + toHexString(tmpCMD));
 		arrCMD.push(tmpCMD);
 	}
 
 	_changeMainVolume(val) {
-		this.log.info('changeMainVolume via GUI: VAL:' + val.toString());
+		this.log.debug('changeMainVolume via GUI: VAL:' + val.toString());
 		const arrVal = conv754(val);
 		let tmpCMD = cmdVol000.slice();
 		tmpCMD[4] = arrVal[0];
@@ -432,10 +432,10 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	//---- pID: 0..7
 	//---- pVal: 0..100
 	_changeInputGain(pID, pVal) {
-		this.log.info('changeInputGain via GUI. ID(Index):' + pID.toString() + ' VAL:' + pVal.toString());
+		this.log.debug('changeInputGain via GUI. ID(Index):' + pID.toString() + ' VAL:' + pVal.toString());
 		if (pID >= 0 && pID < 7) {
 			pVal = map(pVal, 0, 100, -40, 0);
-			this.log.info('changeInputGain via GUI: VAL(neu):' + pVal.toString());
+			this.log.debug('changeInputGain via GUI: VAL(neu):' + pVal.toString());
 			const arrVal = conv754(pVal);
 			let tmpCMD = new Buffer([0x5a, 0xa5, 0x01 /* Input number */, 0x02 /* Gain */, 0x00, 0x00, 0x00, 0x00, 0x0a, 0x10]);
 
@@ -447,10 +447,10 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 			//----fix checksum
 			tmpCMD = convertArray(tmpCMD);
-			this.log.info('changeInputGain(): adding:' + toHexString(tmpCMD));
+			this.log.debug('changeInputGain(): adding:' + toHexString(tmpCMD));
 			arrCMD.push(tmpCMD);
 		} else {
-			this.log.error('changeInputGain() via GUI: Coax inputs are not supported');
+			this.log.debug('changeInputGain() via GUI: Coax inputs are not supported');
 		}
 	}
 
@@ -458,13 +458,13 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	//---- pID: 0..7
 	//---- pVal: 0..100
 	_changeOutputGain(pID, pVal) {
-		this.log.info('changeOutputGain via GUI. ID(Index):' + pID.toString() + ' VAL:' + pVal.toString());
+		this.log.debug('changeOutputGain via GUI. ID(Index):' + pID.toString() + ' VAL:' + pVal.toString());
 
 		//----Displaying the output gain in full numbers
 		this.setStateAsync('outputGainDisplay_' + (pID + 1).toString(), { val: Math.round(pVal), ack: true });
 
 		pVal = map(pVal, 0, 100, -40, 0);
-		this.log.info('changeOutputGain via GUI: VAL(neu):' + pVal.toString());
+		this.log.debug('changeOutputGain via GUI: VAL(neu):' + pVal.toString());
 		const arrVal = conv754(pVal);
 		let tmpCMD = new Buffer([0x5a, 0xa5, 0x01 /* Input number */, 0x02 /* Gain */, 0x00, 0x00, 0x00, 0x00, 0x0a, 0x10]);
 
@@ -476,7 +476,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 		//----fix checksum
 		tmpCMD = convertArray(tmpCMD);
-		this.log.info('changeOutputGain(): adding:' + toHexString(tmpCMD));
+		this.log.debug('changeOutputGain(): adding:' + toHexString(tmpCMD));
 		arrCMD.push(tmpCMD);
 
 
@@ -486,7 +486,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	//----OUT:0-8
 	//----pOnOff: TRUE / FALSE
 	_changeRouting(pIn, pOut, pOnOff) {
-		this.log.info('changeRouting() via GUI: In(Index):' + pIn.toString() + ' Out(Index):' + pOut.toString() + ' pOnOff:' + pOnOff.toString());
+		this.log.debug('changeRouting() via GUI: In(Index):' + pIn.toString() + ' Out(Index):' + pOut.toString() + ' pOnOff:' + pOnOff.toString());
 		if (pIn >= 0 && pIn < 7) {
 			let tmpCMD = new Buffer([0x5a, 0xa5, 0x01, 0x33, 0x00, 0x00, 0x00, 0x00, 0x0a, 0x10]);
 			const i = pOnOff ? 1 : 0;
@@ -501,10 +501,10 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 			//----fix checksum
 			tmpCMD = convertArray(tmpCMD);
-			this.log.info('changeRouting(): adding:' + toHexString(tmpCMD));
+			this.log.debug('changeRouting(): adding:' + toHexString(tmpCMD));
 			arrCMD.push(tmpCMD);
 		} else {
-			this.log.error('changeRouting() via GUI: Coax inputs are not supported');
+			this.log.debug('changeRouting() via GUI: Coax inputs are not supported');
 		}
 		//this.log.info('changeRouting(): last CMD in arrCMD:' + this.toHexString( arrCMD[arrCMD.length-1] ) );
 	}
@@ -514,7 +514,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	//----pOnOff: TRUE / FALSE
 	//----Exclusive Routing can only be switched ON via GUI. Everythin else is handled via the adapter's internal logic
 	_changeExclusiveRouting(pIn, pOut, pOnOff) {
-		this.log.info('changeExclusiveRouting() via GUI: In(Index):' + pIn.toString() + ' Out(Index):' + pOut.toString() + ' pOnOff:' + pOnOff.toString());
+		this.log.debug('changeExclusiveRouting() via GUI: In(Index):' + pIn.toString() + ' Out(Index):' + pOut.toString() + ' pOnOff:' + pOnOff.toString());
 
 		if (pIn >= 0 && pIn < 7) {
 			for (let i = 0; i < 8; i++) {
@@ -534,7 +534,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			//while (sID.length < 2) sID = '0' + sID;
 			//this.setStateAsync('routingNode_ID_' + sID + '__IN_' + (pIn + 1).toString() + '_OUT_' + (pOut + 1).toString(), { val: true, ack: true });
 		} else {
-			this.log.error('changeExclusiveRouting() via GUI: Coax inputs are not supported yet');
+			this.log.debug('changeExclusiveRouting() via GUI: Coax inputs are not supported yet');
 		}
 
 
@@ -564,7 +564,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			await this.setStateAsync('routingNode_Exclusive_ID_' + sID + '__IN_' + (pIn + 1).toString() + '_OUT_' + (pOut + 1).toString(), { val: true, ack: true });
 
 		} else {
-			this.log.error('_fixRoutingStates() via GUI: Coax inputs are not supported yet');
+			this.log.debug('_fixRoutingStates() via GUI: Coax inputs are not supported yet');
 		}
 	}
 
@@ -608,7 +608,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	//----Sendet die Befehle zum Setzen des korrekten Datums an die Matrix
 	setDate() {
 		const sDate = (new Date().getDate()).toString() + '.' + (new Date().getMonth() + 1).toString() + '.' + new Date().getFullYear().toString() + ' ' + new Date().getHours().toString() + ':' + new Date().getMinutes().toString();
-		this.log.info('setDate(' + sDate + ')');
+		this.log.debug('setDate(' + sDate + ')');
 		this._setHardwareDate_year();
 		this._setHardwareDate_month();
 		this._setHardwareDate_day();
@@ -704,7 +704,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_mainVolume() {
-		parentThis.log.info('createStates(): mainVolume');
+		parentThis.log.debug('createStates(): mainVolume');
 		await this.setObjectAsync('mainVolume', {
 			type: 'state',
 			common: {
@@ -722,7 +722,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_inputGain() {
-		parentThis.log.info('createStates(): inputGain');
+		parentThis.log.debug('createStates(): inputGain');
 		for (let inVal = 0; inVal < 8; inVal++) {
 			await this.setObjectAsync('inputGain_' + (inVal + 1).toString(), {
 				type: 'state',
@@ -742,7 +742,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_outputGain() {
-		parentThis.log.info('createStates(): outputGain');
+		parentThis.log.debug('createStates(): outputGain');
 		for (let outVal = 0; outVal < 8; outVal++) {
 			await this.setObjectAsync('outputGain_' + (outVal + 1).toString(), {
 				type: 'state',
@@ -763,7 +763,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 	//----Displays the output gain in whole numbers
 	async _createState_outputGain_Display() {
-		parentThis.log.info('createStates(): outputGain_Display');
+		parentThis.log.debug('createStates(): outputGain_Display');
 		for (let outVal = 0; outVal < 8; outVal++) {
 			await this.setObjectAsync('outputGainDisplay_' + (outVal + 1).toString(), {
 				type: 'state',
@@ -783,7 +783,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_Routing() {
-		parentThis.log.info('createStates(): Routing');
+		parentThis.log.debug('createStates(): Routing');
 		for (let inVal = 0; inVal < 8; inVal++) {
 			for (let outVal = 0; outVal < 8; outVal++) {
 				//await this.setObjectAsync('routingNode_' + ((in*8 + out)+1).toString(), {
@@ -807,7 +807,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_ExclusiveRouting() {
-		parentThis.log.info('createStates(): ExclusiveRouting');
+		parentThis.log.debug('createStates(): ExclusiveRouting');
 		for (let inVal = 0; inVal < 8; inVal++) {
 			for (let outVal = 0; outVal < 8; outVal++) {
 				//await this.setObjectAsync('routingNode_' + ((in*8 + out)+1).toString(), {
@@ -831,7 +831,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_Muting() {
-		parentThis.log.info('createStates(): Muting');
+		parentThis.log.debug('createStates(): Muting');
 		for (let i = 0; i < 8; i++) {
 			await this.setObjectAsync('mute_' + (i + 1).toString(), {
 				type: 'state',
@@ -849,7 +849,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_Labels() {
-		parentThis.log.info('createStates(): Labels');
+		parentThis.log.debug('createStates(): Labels');
 		for (let i = 0; i < 8; i++) {
 			await this.setObjectAsync('_label_Input_' + (i + 1).toString(), {
 				type: 'state',
@@ -886,7 +886,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	}
 
 	async _createState_Save() {
-		parentThis.log.info('createStates(): Save');
+		parentThis.log.debug('createStates(): Save');
 		await this.setObjectAsync('saveToPreset0', {
 			type: 'state',
 			common: {
@@ -920,7 +920,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			iMissedPingCounter++;
 
 			if (iMissedPingCounter > 10) {	//7,5 seconds
-				this.log.info('pingMatrix(): 10 mal No Connection. Forciere Reconnect');
+				this.log.debug('pingMatrix(): 10 mal No Connection. Forciere Reconnect');
 				parentThis.disconnectMatrix();
 				parentThis.initMatrix();
 			}
@@ -956,7 +956,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 								parentThis.disconnectMatrix();
 								parentThis.initMatrix();
 							} else {
-								parentThis.log.info('processCMD(): Irgendetwas kam an... es lebt.');
+								parentThis.log.debug('processCMD(): Irgendetwas kam an... es lebt.');
 							}
 						}, TIMEOUT);
 
@@ -964,7 +964,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 						const iWait = tmp[0] * 256 + tmp[1];
 						bWaitQueue = true;
 						this.log.debug('processCMD.waitQueue: ' + iWait.toString());
-						setTimeout(function () { bWaitQueue = false; parentThis.log.info('processCMD.waitQueue DONE'); }, iWait);
+						setTimeout(function () { bWaitQueue = false; parentThis.log.debug('processCMD.waitQueue DONE'); }, iWait);
 					} else {
 						//----Nix          
 					}
@@ -1033,7 +1033,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			bConnection = true;
 
 		} else if (sMSG === toHexString(cmdTransmissionDone)) {
-			this.log.info('parseMSG(): Transmission Done.');
+			this.log.debug('parseMSG(): Transmission Done.');
 			this.processExclusiveRoutingStates();
 			this.setState('info.connection', true, true); //Green led in 'Instances'			
 			bWaitingForResponse = false;
@@ -1066,7 +1066,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 					const sValue = sMSG.substring(8, 16);
 					const iValue = HexToFloat32(sValue);
 					const bValue = iValue == 0 ? false : true;
-					this.log.info('_parseMSG(): received routing info. IN:' + (iVal).toString() + ' OUT:' + (iCmd - 50).toString() + '. State:' + bValue.toString());
+					this.log.debug('_parseMSG(): received routing info. IN:' + (iVal).toString() + ' OUT:' + (iCmd - 50).toString() + '. State:' + bValue.toString());
 					let sID = (0 + (iVal - 1) * 8 + (iCmd - 50 - 1)).toString();
 					while (sID.length < 2) sID = '0' + sID;
 					this.setStateAsync('routingNode_ID_' + sID + '__IN_' + (iVal).toString() + '_OUT_' + (iCmd - 50).toString(), { val: bValue, ack: true });
@@ -1082,7 +1082,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 					const sValue = sMSG.substring(8, 16);
 					const iValue = HexToFloat32(sValue);
 					const bOnOff = (iValue > 0) ? true : false;
-					this.log.info('_parseMSG(): received OUTPUT Value for MUTE. Output(Index):' + (iVal - 7).toString() + ' Val:' + bOnOff.toString());
+					this.log.debug('_parseMSG(): received OUTPUT Value for MUTE. Output(Index):' + (iVal - 7).toString() + ' Val:' + bOnOff.toString());
 					this.setStateAsync('mute_' + (iVal - 7 + 1).toString(), { val: bOnOff, ack: true });
 
 				} else if (iCmd == 2) {
@@ -1104,7 +1104,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	//----After 'Transmission Done' is received 
 	//----We organize the internal states to reflect the hardware's situation.
 	processExclusiveRoutingStates() {
-		this.log.info('processExclusiveRoutingStates()');
+		//this.log.debug('processExclusiveRoutingStates()');
 
 		for (let i = 0; i < 8; i++) {
 			let iOnCounter = 0;
@@ -1120,10 +1120,10 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 				sIn = (i + 1).toString();
 				sOut = (o + 1).toString();
 				if (arrRouting[iID] == true) {
-					this.log.info('processExclusiveRoutingStates() State is TRUE for ID ' + iID.toString());
+					this.log.debug('processExclusiveRoutingStates() State is TRUE for ID ' + iID.toString());
 					/*await*/ this.setStateAsync('routingNode_Exclusive_ID_' + sID + '__IN_' + sIn + '_OUT_' + sOut, { val: true, ack: true });
 				} else {
-					this.log.info('processExclusiveRoutingStates() State is FALSE for ID ' + iID.toString());
+					this.log.debug('processExclusiveRoutingStates() State is FALSE for ID ' + iID.toString());
 					/*await*/ this.setStateAsync('routingNode_Exclusive_ID_' + sID + '__IN_' + sIn + '_OUT_' + sOut, { val: false, ack: true });
 				}
 			}
@@ -1201,10 +1201,10 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 
 		// examples for the checkPassword/checkGroup functions
 		let result = await this.checkPasswordAsync('admin', 'iobroker');
-		this.log.info('check user admin pw iobroker: ' + result);
+		this.log.debug('check user admin pw iobroker: ' + result);
 
 		result = await this.checkGroupAsync('admin', 'admin');
-		this.log.info('check group user admin group admin: ' + result);
+		this.log.debug('check group user admin group admin: ' + result);
 
 		this.initMatrix();
 	}
@@ -1215,7 +1215,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	 */
 	onUnload(callback) {
 		try {
-			this.log.info('cleaned everything up...');
+			this.log.debug('cleaned everything up...');
 			callback();
 		} catch (e) {
 			callback();
@@ -1230,10 +1230,10 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	onObjectChange(id, obj) {
 		if (obj) {
 			// The object was changed
-			this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
+			this.log.debug(`object ${id} changed: ${JSON.stringify(obj)}`);
 		} else {
 			// The object was deleted
-			this.log.info(`object ${id} deleted`);
+			this.log.debug(`object ${id} deleted`);
 		}
 	}
 
@@ -1245,7 +1245,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 	onStateChange(id, state) {
 		if (state) {
 			// The state was changed
-			this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+			this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 			this.changeMatrix(id, state.val, state.ack);
 		} else {
 			// The state was deleted
