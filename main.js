@@ -206,19 +206,19 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 				stopBits: 1,
 				parity: 'none'
 			});
-			
+
 			parser = matrix.pipe(new ByteLengthParser({ length: 1 }));
 			//---ALT
 			//const options = {
-				//	baudRate: 115200,
-				//	dataBits: 8,
-				//	stopBits: 1,
-				//	parity: 'none'
-				//};
-				
+			//	baudRate: 115200,
+			//	dataBits: 8,
+			//	stopBits: 1,
+			//	parity: 'none'
+			//};
+
 			// matrix = new serialport('/dev/ttyUSB0', options);
 			//parser = matrix.pipe(new ByteLength({ length: 1 }));
-			
+
 			//matrix = new serialport(this.serPort, options);
 			//----
 			if (bConnection == false) {
@@ -274,7 +274,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 			//if (e.code == 'ENOTFOUND' || e.code == 'ECONNREFUSED' || e.code == 'ETIMEDOUT') {
 			//            matrix.destroy();
 			//}
-			parentThis.log.error('AudioMatrix TIMEOUT. TBD');
+			parentThis.log.debug('AudioMatrix TIMEOUT. TBD');
 			//parentThis.connection=false;
 			//parentThis.setConnState(false, true);
 			//            parentThis.reconnect();
@@ -285,12 +285,12 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 				//matrix.destroy();
 				//parentThis.initMatrix();
 				if (e.code == 'ECONNREFUSED') {
-					parentThis.log.error('Keine Verbindung. Ist der Adapter online?');
+					parentThis.log.debug('Keine Verbindung. Ist der Adapter online?');
 					arrCMD.push(cmdWaitQueue_1000);
 
 				}
 			}
-			parentThis.log.error(e);
+			parentThis.log.debug(e);
 			//            parentThis.reconnect();
 		});
 
@@ -951,7 +951,7 @@ class BtouchAudiomatrixB2008 extends utils.Adapter {
 							//----5 Sekunden keine Antwort und das Teil ist offline
 							if (bHasIncomingData == false) {
 								//----Nach x Milisekunden ist noch gar nichts angekommen....
-								parentThis.log.error('processCMD(): KEINE EINKOMMENDEN DATEN NACH ' + TIMEOUT.toString() + ' Milisekunden. OFFLINE?');
+								parentThis.log.debug('processCMD(): KEINE EINKOMMENDEN DATEN NACH ' + TIMEOUT.toString() + ' Milisekunden. OFFLINE?');
 								bConnection = false;
 								parentThis.disconnectMatrix();
 								parentThis.initMatrix();
